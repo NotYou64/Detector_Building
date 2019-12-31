@@ -1,11 +1,19 @@
 // Cole Delong
 // 12/26/2019
 
-// Variables
+// Pin constants
 const int bluePin = 5;
 const int greenPin = 4;
 const int redPin = 3;
 const int tempPin = 0;
+
+// Temperature ranges
+const int redUpper = 30;
+const int redLower = 20;
+const int greenUpper = 20;
+const int greenLower = 10;
+const int blueUpper = 10;
+const int blueLower = 0;
 
 void setup() {
 
@@ -22,24 +30,32 @@ void setup() {
 void loop() {
 
   // The vars for the voltage and degrees
-  float voltage, degC, degF;
+  float voltage, tempC, tempF;
 
   // Find the voltage the tempPin is receiving
   voltage = getVoltage();
 
   // CALIBRATE!!! Use linear equation derived from data to determine the degrees celcius based off of the voltage
-  degC = (voltage * 100) - 50;
+  tempC = (voltage * 100) - 50;
 
   // Use the calculated celcius to determine the temp feihrenheaeiiit because this is America
-  degF = degC * (9.0/5.0) + 32.0;
+  tempF = tempC * (9.0/5.0) + 32.0;
 
   // Print both of these values to the serial port. Eventually these will be displayed on an LCD screen.
   Serial.print("voltage: ");
   Serial.print(voltage);
-  Serial.print("  deg C: ");
-  Serial.print(degC);
-  Serial.print("  deg F: ");
-  Serial.println(degF);
+  Serial.print("  temp C: ");
+  Serial.print(tempC);
+  Serial.print("  temp F: ");
+  Serial.println(tempF);
+
+  // Turn on the correct LED for the temperature range
+  digitalWrite(redPin, LOW);
+  digitalWrite(greenPin, LOW);
+  digitalWrite(bluePin, LOW);
+  if (tempC <= redUpper && tempC >= redLower) digitalWrite(redPin, HIGH);
+  if (tempC <= greenUpper && tempC >= greenLower) digitalWrite(greenPin, HIGH);
+  if (tempC <= blueUpper && tempC >= blueLower) digitalWrite(bluePin, HIGH);
 
   // Delay so it doesn't go too crazy
   delay(500);
