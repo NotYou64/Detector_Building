@@ -76,11 +76,11 @@ void loop() {
     }
     voltage = sum/resetNum;
 
-    // Use the calculated celcius to determine the temp feihrenheaeiiit because this is America
-    tempF = 173.975 * voltage - 61.2073;
+    // Use power equation derived from data to determine the degrees celcius based off of the voltage
+    tempC = 334.596 * pow(0.899807, voltage) - 255.417;
 
-    // Use linear equation derived from data to determine the degrees celcius based off of the voltage
-    tempC = (tempF - 32) * (5.0/9.0);
+    // Use the calculated celcius to determine the temp feihrenheaeiiit because this is America
+    tempF = (tempC * 9/5) + 32;
   
     // If the output is set to on, output the data
     if (output) {
