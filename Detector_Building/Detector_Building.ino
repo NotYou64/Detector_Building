@@ -77,7 +77,7 @@ void loop() {
     voltage = sum/resetNum;
 
     // Use power equation derived from data to determine the degrees celcius based off of the voltage
-    tempC = 334.596 * pow(0.899807, voltage) - 255.417;
+    tempC = 137.632 * pow(0.679972, voltage) - 48.2687;
 
     // Use the calculated celcius to determine the temp feihrenheaeiiit because this is America
     tempF = (tempC * 9/5) + 32;
