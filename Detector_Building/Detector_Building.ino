@@ -24,7 +24,7 @@ const int blueUpper = 10;
 const int blueLower = 0;
 
 // ughhh average temp for more consistency
-const int resetNum = 400;
+const int resetNum = 300;
 float volts[resetNum];
 int cycles = 0;
 
@@ -120,7 +120,7 @@ void loop() {
   cycles += 1;
 
   // Give it a break, it's been working hard.
-  delay(2);
+  delay(1);
 
 }
 
